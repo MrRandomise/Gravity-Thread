@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b55d6b21b22234998fdc3b2bf6137e, type: 3}
+  m_Name: GameSettingsInstaller
+  m_EditorClassIdentifier: Assembly-CSharp::GravityThread.Installers.GameSettingsInstaller
+  BallConfig: {fileID: 11400000, guid: e9114be4c29ac4b43814efa18727af29, type: 2}
+  ThreadConfig: {fileID: 11400000, guid: e8c10e930dc2dce47af05177e3467d69, type: 2}
+  LevelGenConfig: {fileID: 11400000, guid: 13d3596bc0c859646aa026bad6b75c71, type: 2}
+  GameConfig: {fileID: 11400000, guid: d5f0d39baac74054d9a2bae8f74402c9, type: 2}
+  DefaultLanguage: ru
+  EnableDebug: 1

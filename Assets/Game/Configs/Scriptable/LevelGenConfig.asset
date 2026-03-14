@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e65b4a9263f2d041beb8530d47cf4ad, type: 3}
+  m_Name: LevelGenConfig
+  m_EditorClassIdentifier: Assembly-CSharp::GravityThread.Configs.LevelGenerationConfig
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  GridWidth: 8
+  GridHeight: 16
+  CellSize: 1
+  PathWidth: 2
+  MinStraightLength: 3
+  MaxStraightLength: 7
+  SpikeChance: 0.15
+  ColorGateChance: 0.08
+  PulsingWallChance: 0.1
+  BottleChance: 0.12
+  SpikeChancePerLevel: 0.01
+  NarrowingPerLevel: 0.005
+  WallPrefab: {fileID: 6901811839582359886, guid: c65d67835882ada46b1cce663d110f2f, type: 3}
+  SpikePrefab: {fileID: 2637305873228593905, guid: 4b184d400d006d6479eae04debcec86f, type: 3}
+  ColorGatePrefab: {fileID: 5739992973325443125, guid: 3b5b265fef5c07c4fa28cde1441aa1fd, type: 3}
+  PulsingWallPrefab: {fileID: 9005108849153943360, guid: 14f9773371ec74543a85537e82b68328, type: 3}
+  BottlePrefab: {fileID: 2292501753898010474, guid: 64610ed771fcdbc44b7f242cf02bbd06, type: 3}
+  GoalPrefab: {fileID: 4243502034560422157, guid: 8116745f3aa17834ea3f03ec60bfad0c, type: 3}
+  ColorSourcePrefab: {fileID: 4090101006499805548, guid: c8c2752d940a9d746aae3401d0d3381c, type: 3}
