@@ -47,7 +47,8 @@ namespace GravityThread.Gameplay.LevelGen
                     {
                         int px = cell.x + dx;
                         int py = cell.y + dy;
-                        if (px >= 0 && px < width && py >= 0 && py < height)
+                        // Оставляем границу в 1 клетку по всем сторонам
+                        if (px >= 1 && px < width - 1 && py >= 1 && py < height - 1)
                             data.Grid[px, py] = CellType.Path;
                     }
                 }
@@ -59,6 +60,9 @@ namespace GravityThread.Gameplay.LevelGen
             data.Grid[data.StartCell.x, data.StartCell.y] = CellType.Start;
             data.Grid[data.GoalCell.x, data.GoalCell.y] = CellType.Goal;
 
+            // Ensure border walls are never carved out
+            SealBorders(data);
+
             // Place obstacles along path
             PlaceObstacles(data, path, rng, levelIndex);
 
@@ -69,19 +73,21 @@ namespace GravityThread.Gameplay.LevelGen
         {
             var path = new List<Vector2Int>();
 
+            // Start inside the border (y=1), centered
             int x = width / 2;
-            int y = 0;
+            int y = 1;
             path.Add(new Vector2Int(x, y));
 
             int direction = 0; // 0 = up, 1 = right, -1 = left
 
-            while (y < height - 2)
+            // Stop at height - 3 to leave border + goal placement room
+            while (y < height - 3)
             {
                 int straightLen = rng.Next(_config.MinStraightLength, _config.MaxStraightLength + 1);
 
                 if (direction == 0) // Move up
                 {
-                    for (int i = 0; i < straightLen && y < height - 2; i++)
+                    for (int i = 0; i < straightLen && y < height - 3; i++)
                     {
                         y++;
                         path.Add(new Vector2Int(x, y));
@@ -93,14 +99,32 @@ namespace GravityThread.Gameplay.LevelGen
                     for (int i = 0; i < straightLen; i++)
                     {
                         x += direction;
-                        x = Mathf.Clamp(x, 1, width - 3);
+                        // Clamp so path + pathWidth stays inside the border
+                        x = Mathf.Clamp(x, 2, width - 2 - _config.PathWidth);
                         path.Add(new Vector2Int(x, y));
                     }
-                    direction = 0; // Go back to up
+                    direction = 0;
                 }
             }
 
             return path;
+        }
+
+        /// <summary>
+        /// Forces all edge cells to be walls so the maze is fully sealed.
+        /// </summary>
+        private void SealBorders(LevelData data)
+        {
+            for (int x = 0; x < data.Width; x++)
+            {
+                data.Grid[x, 0] = CellType.Wall;
+                data.Grid[x, data.Height - 1] = CellType.Wall;
+            }
+            for (int y = 0; y < data.Height; y++)
+            {
+                data.Grid[0, y] = CellType.Wall;
+                data.Grid[data.Width - 1, y] = CellType.Wall;
+            }
         }
 
         private void PlaceObstacles(LevelData data, List<Vector2Int> path, System.Random rng, int levelIndex)
@@ -120,7 +144,6 @@ namespace GravityThread.Gameplay.LevelGen
                     data.Grid[cell.x, cell.y] = CellType.ColorGate;
                     colorGatePlaced = true;
 
-                    // Place color source earlier in path
                     int sourceIdx = Mathf.Max(2, i / 2);
                     var sourceCell = path[sourceIdx];
                     if (data.Grid[sourceCell.x, sourceCell.y] == CellType.Path)
@@ -128,7 +151,6 @@ namespace GravityThread.Gameplay.LevelGen
                 }
                 else if (roll < spikeChance)
                 {
-                    // Place spike adjacent to path (on wall)
                     TryPlaceSpikeAdjacent(data, cell, rng);
                 }
                 else if (roll < spikeChance + _config.PulsingWallChance)
@@ -151,7 +173,7 @@ namespace GravityThread.Gameplay.LevelGen
             {
                 int nx = cell.x + offset.x;
                 int ny = cell.y + offset.y;
-                if (nx >= 0 && nx < data.Width && ny >= 0 && ny < data.Height && data.Grid[nx, ny] == CellType.Wall)
+                if (nx > 0 && nx < data.Width - 1 && ny > 0 && ny < data.Height - 1 && data.Grid[nx, ny] == CellType.Wall)
                 {
                     data.Grid[nx, ny] = CellType.Spike;
                     return;
@@ -168,7 +190,7 @@ namespace GravityThread.Gameplay.LevelGen
             {
                 int nx = cell.x + offset.x;
                 int ny = cell.y + offset.y;
-                if (nx >= 0 && nx < data.Width && ny >= 0 && ny < data.Height && data.Grid[nx, ny] == CellType.Wall)
+                if (nx > 0 && nx < data.Width - 1 && ny > 0 && ny < data.Height - 1 && data.Grid[nx, ny] == CellType.Wall)
                 {
                     data.Grid[nx, ny] = CellType.PulsingWall;
                     return;

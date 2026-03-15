@@ -2,6 +2,7 @@ using GravityThread.Core.Events;
 using GravityThread.Gameplay;
 using GravityThread.Services.Debug;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace GravityThread.Debug
@@ -15,6 +16,8 @@ namespace GravityThread.Debug
 
         private bool _showOverlay;
         private string _lastEvent = "";
+
+        private InputAction _toggleAction;
 
         [Inject]
         public void Construct(IDebugService debugService, BallController ball, ThreadSystem thread, EventBus eventBus)
@@ -32,11 +35,21 @@ namespace GravityThread.Debug
             _eventBus.Subscribe<BottleCollectedEvent>(e => _lastEvent = "Bottle collected!");
             _eventBus.Subscribe<LevelCompletedEvent>(e => _lastEvent = $"Level {e.LevelIndex} complete! Score: {e.Score}");
             _eventBus.Subscribe<LevelFailedEvent>(e => _lastEvent = $"Level {e.LevelIndex} failed!");
+
+            _toggleAction = new InputAction("ToggleDebug", InputActionType.Button, "<Keyboard>/f1");
+            _toggleAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _toggleAction?.Disable();
+            _toggleAction?.Dispose();
+            _toggleAction = null;
         }
 
         private void Update()
         {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.F1))
+            if (_toggleAction != null && _toggleAction.WasPressedThisFrame())
                 _showOverlay = !_showOverlay;
         }
 

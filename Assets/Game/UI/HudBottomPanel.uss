@@ -1,0 +1,253 @@
+/* ========================================
+   HUD Bottom Panel — Neon Cyberpunk Style
+   ======================================== */
+
+:root {
+    --cyan: rgb(0, 255, 255);
+    --cyan-dim: rgba(0, 255, 255, 0.3);
+    --cyan-glow: rgba(0, 255, 255, 0.12);
+    --magenta: rgb(230, 0, 255);
+    --border-purple: rgb(128, 0, 255);
+    --panel-bg: rgba(15, 3, 36, 0.95);
+    --bar-bg: rgba(15, 5, 36, 1);
+    --bar-text: rgba(13, 5, 31, 1);
+}
+
+/* ---------- ROOT PANEL ---------- */
+#hud-bottom-panel {
+    position: absolute;
+    bottom: 8px;
+    left: 12px;
+    right: 12px;
+    height: 160px;
+    background-color: var(--panel-bg);
+    border-width: 3px;
+    border-color: var(--border-purple);
+    border-radius: 6px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* ---------- CORNER ACCENTS ---------- */
+.corner-accent {
+    position: absolute;
+    background-color: var(--cyan);
+    opacity: 0.9;
+}
+
+.corner-tl-h {
+    top: 6px;
+    left: 6px;
+    width: 50px;
+    height: 4px;
+}
+
+.corner-tl-v {
+    top: 6px;
+    left: 6px;
+    width: 4px;
+    height: 50px;
+}
+
+.corner-tr-h {
+    top: 6px;
+    right: 6px;
+    width: 50px;
+    height: 4px;
+}
+
+.corner-tr-v {
+    top: 6px;
+    right: 6px;
+    width: 4px;
+    height: 50px;
+}
+
+.corner-bl-h {
+    bottom: 6px;
+    left: 6px;
+    width: 50px;
+    height: 4px;
+}
+
+.corner-bl-v {
+    bottom: 6px;
+    left: 6px;
+    width: 4px;
+    height: 50px;
+}
+
+.corner-br-h {
+    bottom: 6px;
+    right: 6px;
+    width: 50px;
+    height: 4px;
+}
+
+.corner-br-v {
+    bottom: 6px;
+    right: 6px;
+    width: 4px;
+    height: 50px;
+}
+
+/* ---------- SCAN LINES ---------- */
+.scan-line {
+    position: absolute;
+    height: 2px;
+    background-color: var(--cyan-glow);
+}
+
+.scan-line-left {
+    top: 32%;
+    left: 4%;
+    width: 28%;
+}
+
+.scan-line-right {
+    top: 32%;
+    right: 4%;
+    width: 28%;
+}
+
+/* ---------- SCORE SECTION (left) ---------- */
+#score-section {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+#score-label {
+    font-size: 28px;
+    color: var(--cyan);
+    -unity-font-style: bold;
+    letter-spacing: 4px;
+    margin-bottom: 2px;
+}
+
+#score-value {
+    font-size: 56px;
+    color: var(--cyan);
+    -unity-font-style: bold;
+}
+
+/* ---------- PAUSE BUTTON (center) ---------- */
+#pause-container {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    translate: -50% 0;
+    width: 150px;
+    height: 180px;
+    align-items: center;
+    justify-content: center;
+}
+
+#pause-ring {
+    width: 140px;
+    height: 140px;
+    align-items: center;
+    justify-content: center;
+    border-width: 4px;
+    border-color: var(--cyan);
+    border-radius: 70px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#pause-button {
+    width: 110px;
+    height: 110px;
+    border-radius: 55px;
+    background-color: rgba(0, 76, 76, 0.6);
+    border-width: 2px;
+    border-color: var(--cyan-dim);
+    align-items: center;
+    justify-content: center;
+}
+
+#pause-button:hover {
+    background-color: rgba(0, 102, 102, 0.7);
+    border-color: var(--cyan);
+}
+
+#pause-button:active {
+    background-color: rgba(0, 51, 51, 0.8);
+    scale: 0.95 0.95;
+}
+
+#pause-icon {
+    font-size: 42px;
+    color: var(--cyan);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+/* ---------- THREAD SECTION (right) ---------- */
+#thread-section {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+#thread-label {
+    font-size: 28px;
+    color: var(--cyan);
+    -unity-font-style: bold;
+    letter-spacing: 4px;
+    margin-bottom: 6px;
+}
+
+#thread-bar-container {
+    width: 100%;
+    height: 36px;
+    background-color: var(--bar-bg);
+    border-width: 2px;
+    border-color: var(--cyan);
+    border-radius: 3px;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+#thread-bar-fill {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    background-color: var(--cyan);
+    border-radius: 1px;
+}
+
+#thread-percent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 28px;
+    color: var(--bar-text);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+/* ---------- HEALTH TEXT ---------- */
+#health-text {
+    position: absolute;
+    bottom: 164px;
+    left: 24px;
+    font-size: 24px;
+    color: var(--cyan);
+    -unity-text-align: upper-left;
+}

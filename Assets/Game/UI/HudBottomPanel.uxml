@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEditor.UIElements"
+         xsi="http://www.w3.org/2001/XMLSchema-instance"
+         editor="UnityEditor.UIElements"
+         noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd">
+
+    <Style src="HudBottomPanel.uss" />
+
+    <!-- Health above panel -->
+    <ui:Label name="health-text" />
+
+    <!-- Main bottom panel -->
+    <ui:VisualElement name="hud-bottom-panel">
+
+        <!-- Corner accents -->
+        <ui:VisualElement class="corner-accent corner-tl-h" />
+        <ui:VisualElement class="corner-accent corner-tl-v" />
+        <ui:VisualElement class="corner-accent corner-tr-h" />
+        <ui:VisualElement class="corner-accent corner-tr-v" />
+        <ui:VisualElement class="corner-accent corner-bl-h" />
+        <ui:VisualElement class="corner-accent corner-bl-v" />
+        <ui:VisualElement class="corner-accent corner-br-h" />
+        <ui:VisualElement class="corner-accent corner-br-v" />
+
+        <!-- Scan lines -->
+        <ui:VisualElement class="scan-line scan-line-left" />
+        <ui:VisualElement class="scan-line scan-line-right" />
+
+        <!-- SCORE — left -->
+        <ui:VisualElement name="score-section">
+            <ui:Label name="score-label" text="SCORE:" />
+            <ui:Label name="score-value" text="0" />
+        </ui:VisualElement>
+
+        <!-- THREAD — right -->
+        <ui:VisualElement name="thread-section">
+            <ui:Label name="thread-label" text="THREAD" />
+            <ui:VisualElement name="thread-bar-container">
+                <ui:VisualElement name="thread-bar-fill" />
+                <ui:Label name="thread-percent" text="100" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+    <!-- PAUSE — center, overlapping panel -->
+    <ui:VisualElement name="pause-container" picking-mode="Ignore">
+        <ui:VisualElement name="pause-ring" picking-mode="Ignore">
+            <ui:Button name="pause-button">
+                <ui:Label name="pause-icon" text="❚❚" picking-mode="Ignore" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+</ui:UXML>

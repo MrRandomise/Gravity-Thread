@@ -1,20 +1,19 @@
 using DG.Tweening;
-using DG.Tweening;
 using GravityThread.Core;
-using GravityThread.Core.Events;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using UIToolkitButton = UnityEngine.UIElements.Button;
 
 namespace GravityThread.UI
 {
     public sealed class PauseView : MonoBehaviour
     {
-        [SerializeField] private Button _pauseButton;
         [SerializeField] private CanvasGroup _pausePanel;
         [SerializeField] private Button _resumeButton;
 
         private GameStateManager _stateManager;
+        private UIToolkitButton _pauseButton;
 
         [Inject]
         public void Construct(GameStateManager stateManager)
@@ -32,15 +31,26 @@ namespace GravityThread.UI
             }
         }
 
+        private void Start()
+        {
+            // Get pause button from HudView (built at runtime in Awake)
+            var hudView = GetComponent<HudView>();
+            if (hudView != null)
+                _pauseButton = hudView.PauseButton;
+
+            // UI Toolkit Button uses clicked event instead of onClick
+            if (_pauseButton != null)
+                _pauseButton.clicked += OnPauseClicked;
+        }
+
         private void OnEnable()
         {
-            if (_pauseButton != null) _pauseButton.onClick.AddListener(OnPauseClicked);
             if (_resumeButton != null) _resumeButton.onClick.AddListener(OnResumeClicked);
         }
 
         private void OnDisable()
         {
-            if (_pauseButton != null) _pauseButton.onClick.RemoveListener(OnPauseClicked);
+            if (_pauseButton != null) _pauseButton.clicked -= OnPauseClicked;
             if (_resumeButton != null) _resumeButton.onClick.RemoveListener(OnResumeClicked);
         }
 

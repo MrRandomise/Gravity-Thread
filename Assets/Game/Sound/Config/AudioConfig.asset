@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08337eeb391aad64882feaffa4629bfd, type: 3}
+  m_Name: AudioConfig
+  m_EditorClassIdentifier: Assembly-CSharp::GravityThread.Configs.AudioConfig
+  _backgroundMusic:
+  - {fileID: 8300000, guid: aea37dc47be49784b932f12229437071, type: 3}
+  - {fileID: 8300000, guid: 0a6b929b3e603bb4293a6f3618f5e0c5, type: 3}
+  - {fileID: 8300000, guid: 1a16252a62b1c5e48921169d8d13c76b, type: 3}
+  _musicVolume: 0.5
+  _loop: 1
